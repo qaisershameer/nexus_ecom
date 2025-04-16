@@ -53,10 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDcsMekwf8GSpSWUlHYKUyQYiZFT98zoYg',
-    appId: '1:51026250378:android:67ef26cd8075d75632bb73',
+    apiKey: 'AIzaSyDcsMekwf8GSpSWUlHYKUyQYiZFT98zoYgq',
+    appId: '1:51026250378:android:67ef26cd8075d75632bb73r',
     messagingSenderId: '51026250378',
-    projectId: 'nexusecom-7861',
+    projectId: 'nexusecom-7861d',
     storageBucket: 'nexusecom-7861.firebasestorage.app',
   );
 }
