@@ -1,23 +1,28 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nexus_ecom/utils/colors.dart';
+import 'package:nexus_ecom/view/auth/login_screen.dart';
+import 'auth/user_auth.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  Get.put(AuthService());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)
       .then((value) {
-        if (kDebugMode) {
-          print('Connected =======> Firebase Configured Successfully.');
-        }
-      })
-      .onError((error, stackTrace) {
-        if (kDebugMode) {
-          print('Error =======> Firebase is Not Configured Successfully.');
-          print('Error =======> $error');
-        }
-      });
+    if (kDebugMode) {
+      print('Connected =======> Firebase Configured Successfully.');
+    }
+  }).onError((error, stackTrace) {
+    if (kDebugMode) {
+      print('Error =======> Firebase is Not Configured Successfully.');
+      print('Error =======> $error');
+    }
+  });
 
   runApp(const MyApp());
 
@@ -28,59 +33,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Nexus E-COM',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: UColors.primary),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      home: LoginScreen(),
     );
   }
 }
